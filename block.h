@@ -11,8 +11,6 @@ using namespace cs221util;
 
 class Block
 {
-   
-
 public:
    /** 
     * Creates a block that is width x height pixels in size
@@ -39,11 +37,9 @@ public:
    int height() const;
 
 private:
-   vector<vector<HSLAPixel>> data;
-   PNG &img;
-   int x;
-   int y;
-   int width;
-   int height;
+   vector<vector<HSLAPixel>> _data;
+
+   int _width;
+   int _height;
 };
 #endif
