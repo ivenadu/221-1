@@ -56,5 +56,16 @@ void Block::build(PNG &im, int column, int row, int width, int height)
 
 void Block::flip()
 {
-/* your code here */
+    for(int i = 0; i < this->_height >> 1; i++){
+        int j = this->_height - i - 1;
+
+        auto & s = _data[i];
+        auto & t = _data[j];
+
+        for(int k = 0; k < _width; k++){
+            auto tmp = s[k];
+            s[k] = t[k];
+            t[k] = tmp;
+        }
+    }
 }
