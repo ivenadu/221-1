@@ -11,7 +11,7 @@
  */
 Chain::~Chain()
 {
-/* your code here */
+    clear();
 }
 
 /**
@@ -22,7 +22,11 @@ Chain::~Chain()
  */
 void Chain::insertBack(const Block &ndata)
 {
-/* your code here */
+  Node* my_tail = tail();
+  my_tail->next = new Node(ndata);
+  my_tail->next->next = head_;
+
+  length_ ++;
 }
 
 
@@ -34,7 +38,14 @@ void Chain::insertBack(const Block &ndata)
  */
 void Chain::swap(int i, int j)
 {
-/* your code here */
+    Node* n1 = this->walk(head_, i);
+    Node* n2 = this->walk(head_, j);
+    Node* t = n1->next;
+    n1->next = n2->next;
+    n2->next = t;
+
+    this->walk(head_, i-1)->next = n2;
+    this->walk(head_, j-1)->next = n1;
 }
 
 /**
@@ -42,7 +53,10 @@ void Chain::swap(int i, int j)
  */
 void Chain::reverse()
 {
-/* your code here */
+   int m = length_ >> 1;
+   for(int i = 0; i < m; i++){
+       swap(i+1, length_ - i);
+   }
 }
 
 /*
@@ -58,7 +72,9 @@ void Chain::reverse()
 */
 void Chain::rotate(int k)
 {
-/* your code here */
+    for(int i = 0; i < k-1; i++){
+        swap(i+1, i+2);
+    }
 }
 
 /**
@@ -67,7 +83,16 @@ void Chain::rotate(int k)
  */
 void Chain::clear()
 {
-/* your code here */
+   Node *p1, *p2;
+   p1 = head_;
+   p2 = p1->next;
+   
+   while(p2 != head_){
+      p1 = p2;
+      p2 = p1->next;
+
+      delete p1;
+   } 
 }
 
 /* makes the current object into a copy of the parameter:

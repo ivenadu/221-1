@@ -109,6 +109,12 @@ private:
    void copy(const Chain &other);
 
    /* =================== end of private PA1 functions ============== */
+
+   Node* tail() const {
+      Node* p = head_;
+      while(p->next != head_) p = p->next;
+      return p;
+   }
 };
 
 #endif
