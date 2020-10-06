@@ -74,11 +74,10 @@ void Chain::reverse()
 void Chain::rotate(int k)
 {
     int start = 0;
-    for(int r = 0; r < height_; r++, start += width_){
+    for(int g = 0; g < length_ / k; g++, start += k)
         for(int i = 0; i < k-1; i++){
             swap(i+1 + start, i+2 + start);
         }
-    }
 }
 
 /**
@@ -109,13 +108,9 @@ void Chain::clear()
  */
 void Chain::copy(Chain const &other)
 {
-   clear();
-
-   if(head_ == nullptr){
-       head_ = new Node();
-       head_->next = head_;
-       length_ = 0;
-   }
+    head_ = new Node();
+    head_->next = head_;
+    length_ = 0;
 
    Node * p = other.head_->next;
    while(p != other.head_){
