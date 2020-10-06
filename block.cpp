@@ -33,6 +33,8 @@ void Block::render(PNG &im, int column, int row) const
 
 void Block::build(PNG &im, int column, int row, int width, int height)
 {
+    _left = column;
+    _top = row;
     _width = width;
     _height = height;
 

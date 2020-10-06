@@ -35,10 +35,14 @@ public:
    // Return the width and height of the block.
    int width() const;
    int height() const;
+   int left() const { return _left; }
+   int top() const { return _top; }
 
 private:
    vector<vector<HSLAPixel>> _data;
 
+   int _left;
+   int _top;
    int _width;
    int _height;
 };

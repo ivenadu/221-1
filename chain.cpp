@@ -27,6 +27,9 @@ void Chain::insertBack(const Block &ndata)
   my_tail->next->next = head_;
 
   length_ ++;
+
+  width_ = std::max(width_, ndata.width() + ndata.left());
+  height_ = std::max(height_, ndata.height() + ndata.top());
 }
 
 
@@ -103,5 +106,12 @@ void Chain::clear()
  */
 void Chain::copy(Chain const &other)
 {
-/* your code here */
+   clear();
+
+   Node * p = other.head_;
+   while(p->next != other.head_){
+       this->insertBack(p->data);
+       p = p->next;
+  }
 }
+
