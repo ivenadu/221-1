@@ -78,6 +78,7 @@ private:
    int length_; // count of data elts in chain. does not count sentinels.
    int height_; // height of blocks in chain.
    int width_;  // width of blocks in chain. (must be consistent.)
+   int rows_, cols_; //grid dimension
 
 
    /* =================== private given functions ============== */

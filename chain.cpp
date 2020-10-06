@@ -73,8 +73,11 @@ void Chain::reverse()
 */
 void Chain::rotate(int k)
 {
-    for(int i = 0; i < k-1; i++){
-        swap(i+1, i+2);
+    int start = 0;
+    for(int r = 0; r < height_; r++, start += width_){
+        for(int i = 0; i < k-1; i++){
+            swap(i+1 + start, i+2 + start);
+        }
     }
 }
 

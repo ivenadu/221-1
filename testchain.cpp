@@ -90,6 +90,7 @@ TEST_CASE("chain::basic rotate k = 2", "[weight=1][part=chain]")
     c.rotate(2);
 
     PNG res = c.render(cols,rows);
+    res.writeToFile("images/rbgrotate2_my.png");
 
 
     PNG expected; expected.readFromFile("images/rbgrotate2.png");

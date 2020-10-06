@@ -11,33 +11,29 @@
 
 int Block::width() const
 {
-return this->_width;
+    if (height() == 0) return 0;
+    return this->data[0].size();
 }
 
 int Block::height() const
 {
-return this->_height;
+return this->data.size();
 }
 
 void Block::render(PNG &im, int column, int row) const
 {
-    int w = std::min((int)im.width() - column, _width);
-    int h = std::min((int)im.height() - row, _height);
+    int w = std::min((int)im.width() - column,  width());
+    int h = std::min((int)im.height() - row,  height());
 
     for(int i = 0; i < h; i++){
         for(int j =0; j < w; j++){
-            *im.getPixel(column + j, row + i) =  this->_data[i][j]; 
+            *im.getPixel(column + j, row + i) =  this->data[i][j]; 
         }
     }
 }
 
 void Block::build(PNG &im, int column, int row, int width, int height)
 {
-    _left = column;
-    _top = row;
-    _width = width;
-    _height = height;
-
     if (column + width > (int)im.width()){
         throw "Invalid width";
     }
@@ -52,19 +48,21 @@ void Block::build(PNG &im, int column, int row, int width, int height)
         for(int j = 0; j < width; j++){
             tmp_row.push_back(*im.getPixel(column + j, row + i));
         }
-        _data.push_back(tmp_row);
+        data.push_back(tmp_row);
     }
 }
 
 void Block::flip()
 {
-    for(int i = 0; i < this->_height >> 1; i++){
-        int j = this->_height - i - 1;
+    const int W = width();
+    const int H = height();
+    for(int i = 0; i < H >> 1; i++){
+        int j = H - i - 1;
 
-        auto & s = _data[i];
-        auto & t = _data[j];
+        auto & s = data[i];
+        auto & t = data[j];
 
-        for(int k = 0; k < _width; k++){
+        for(int k = 0; k < W; k++){
             auto tmp = s[k];
             s[k] = t[k];
             t[k] = tmp;
