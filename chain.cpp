@@ -28,8 +28,6 @@ void Chain::insertBack(const Block &ndata)
 
   length_ ++;
 
-  width_ = std::max(width_, ndata.width() + ndata.left());
-  height_ = std::max(height_, ndata.height() + ndata.top());
 }
 
 
@@ -86,6 +84,8 @@ void Chain::rotate(int k)
  */
 void Chain::clear()
 {
+    if(head_ == nullptr) return;
+
    Node *p1, *p2;
    p1 = head_;
    p2 = p1->next;
@@ -108,10 +108,19 @@ void Chain::copy(Chain const &other)
 {
    clear();
 
-   Node * p = other.head_;
-   while(p->next != other.head_){
+   if(head_ == nullptr){
+       head_ = new Node();
+       head_->next = head_;
+       length_ = 0;
+   }
+
+   Node * p = other.head_->next;
+   while(p != other.head_){
        this->insertBack(p->data);
        p = p->next;
-  }
+   }
+
+   width_ = other.width_;
+   height_ = other.height_;
 }
 
