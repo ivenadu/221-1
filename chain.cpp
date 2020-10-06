@@ -98,6 +98,9 @@ void Chain::clear()
 
       delete p1;
    } 
+
+   delete head_;
+   head_ = nullptr;
 }
 
 /* makes the current object into a copy of the parameter:
